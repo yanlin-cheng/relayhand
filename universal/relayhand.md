@@ -60,9 +60,11 @@ Edited: <extracted from the conversation, real paths; uncommitted working-tree c
 ## Output requirements
 
 1. Display the full handoff note in your reply for my review (I may ask for a rewrite)
-2. At the end of your reply, output a prompt code block that can be copied straight into a new conversation, with this fixed content (in the conversation's language):
+2. At the end of your reply, output a prompt code block that can be copied straight into a new conversation, with this fixed content (in the conversation's language). The first line is the naming seed: many AI products auto-title a conversation from its first prompt, so this line steers the title toward the relay chain. Also suggest saving the handoff note as <relayhand-YYYYMMDD-HHmm>.md using the same timestamp so file name and session name stay aligned:
 
 ```
+Relay relayhand-<YYYYMMDD-HHmm> — <one-sentence task, in the conversation's language>
 You are taking over a relayed task. Below is the handoff note from the previous session. Read it fully, do not recap its contents, then start executing the "Next" section directly. Run `git status` first to reconcile the repo's actual state with the note; if they disagree, reconcile before acting.
 <full text of the handoff note>
 ```
+3. Below the code block, add one human-readable line (not inside it) telling me to rename the new conversation to relayhand-<YYYYMMDD-HHmm> after pasting — via `/rename` in Claude Code, or the product's own conversation-rename feature — so the relay chain stays traceable in the session list (optional, but exact)

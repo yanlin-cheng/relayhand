@@ -78,17 +78,21 @@ Display the full handoff note in chat for review (rewrite on request).
 
 At the end of the reply, first a one-line note "copy the following into a new conversation", then the code block (the prompt itself is also written in the conversation's language):
 
-**File version (default output)**:
+**File version (default output)** — the first line is the naming seed: the session's auto-generated title summarizes the first prompt, so this line steers the title toward the relay chain:
 
 ```
+Relay relayhand-<YYYYMMDD-HHmm> — <one-sentence task, in the conversation's language>
 Read <full path to the handoff note>. It is the handoff note from the previous session. Read it fully, do not recap its contents, then start executing the "Next" section directly. Run `git status` first to reconcile the repo's actual state with the note; if they disagree, reconcile before acting.
 ```
 
 If $ARGUMENTS carries a focus, append one line: `Focus this time: $ARGUMENTS`
 
-**Embedded version (only when $ARGUMENTS contains "cross-product" / 跨产品; self-contained, pasteable into any AI product's new conversation)**:
+Below the code block, add one human-readable line (not inside it): `After pasting, run /rename relayhand-<YYYYMMDD-HHmm> to pin the session name to the relay chain (optional, but exact).`
+
+**Embedded version (only when $ARGUMENTS contains "cross-product" / 跨产品; self-contained, pasteable into any AI product's new conversation)** — same naming-seed first line:
 
 ```
+Relay relayhand-<YYYYMMDD-HHmm> — <one-sentence task, in the conversation's language>
 You are taking over a relayed task. Below is the handoff note from the previous session. Read it fully, do not recap its contents, then start executing the "Next" section directly. Run `git status` first to reconcile the repo's actual state with the note; if they disagree, reconcile before acting.
 <full text of the handoff note>
 ```
