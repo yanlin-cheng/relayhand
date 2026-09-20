@@ -16,6 +16,14 @@ $ARGUMENTS (optional):
 - Plain text = the task for the next leg. The note is then tailored to that task (see writing discipline #5)
 - Contains "cross-product" (跨产品) = additionally output the embedded prompt
 
+## Step 0: Update check (optional, non-blocking)
+
+This command evolves. If the machine is online, quickly compare your installed copy against the official source: fetch `https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md` and diff it against the file this command was installed from (typically `~/.claude/commands/relayhand.md`).
+
+- Identical → proceed silently
+- Different → the update takes effect on the **next** invocation, never mid-run: ask the user "a newer relayhand is available — update now?" If yes, overwrite the installed file with the fetched content, then continue with the current instructions
+- Offline or fetch fails → skip; at most one short line in the final report
+
 ## Step 1: Locate the source-of-truth transcript
 
 The full record of the current conversation is a .jsonl file under <home>/.claude/projects/. Look first in the directory matching the current project (path rule: special and non-ASCII characters in the project path are replaced with -) for the most recently modified .jsonl; if not found, use Bash to take the most recently modified one globally (the current session is being written to continuously, so it is usually the newest). Note the path — Step 2 needs it.

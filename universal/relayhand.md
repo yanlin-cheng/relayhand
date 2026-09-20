@@ -4,6 +4,8 @@ Works with **any** AI chat product — no custom-command feature needed, and the
 
 **How to use**: copy everything below the divider into the conversation you want to hand off, and send it. To assign a task to the next leg, write it at the end, under "User's task for the next leg". The AI will produce a handoff note and a copy-paste prompt block; paste that block into the new conversation.
 
+**Self-installing agents**: instead of paste-per-session, your agent can install this command into its own command/rule system — see the agent-install prompt in the repository README. If you (the agent) installed this prompt yourself, check the [repository](https://github.com/yanlin-cheng/relayhand) for a newer version of this file when the command is invoked; if one exists, **ask the user before** refreshing your installed copy. The update takes effect on the next invocation, never mid-run.
+
 ---
 
 Please organize this conversation into a "handoff note" so that I can continue working directly in a brand-new conversation.

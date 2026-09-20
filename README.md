@@ -136,6 +136,7 @@ Small mechanisms that add up:
 | **Verbatim protection** | Your latest instruction is quoted word-for-word, never paraphrased into the summarizer's interpretation |
 | **Uncommitted counts as edited** | The Files section reports working-tree changes too, not just commits |
 | **Redaction built in** | API keys, passwords, and personal information never enter the note |
+| **Self-update check** | A run may diff the installed copy against the repo; a newer version is offered to the user and takes effect on the next invocation — never mid-run, and silently skipped offline |
 
 ## Usage examples (Claude Code)
 
