@@ -41,6 +41,7 @@ The handoff note is not a chat recap — it is a task handoff sheet written for 
 ## Goal            ← one sentence: what is being built/fixed, and why
 ## State           ← done / in progress / blocked
 ## Key decisions   ← technical choices that affect later work, and why
+## Pitfalls        ← failed attempts + why; debugging: symptom → root cause → fix
 ## Next            ← immediately executable actions        ★ the only detailed section
 ## Files           ← read / edited (extracted from the real conversation)
 ## Source of truth ← path to the full transcript; grep it when detail is missing

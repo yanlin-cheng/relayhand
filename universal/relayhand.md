@@ -30,6 +30,9 @@ Section titles follow the conversation language; shown here in English:
 ## Key decisions
 <only technical choices that affect later work, and why>
 
+## Pitfalls (do not repeat)
+<failed attempts and why they failed; debugging conclusions as symptom → root cause → fix>
+
 ## Next
 <immediately executable actions, in order, concrete enough to run as-is>
 
@@ -45,9 +48,11 @@ Edited: <extracted from the conversation, real paths>
 3. Facts only, no vibes; every word must help the next leg do the work
 4. "Next" is the only section allowed detail; every other section serves it
 5. If I attach a task for the next leg (see the end of this message), the task is the filter: summarize only the background, decisions, files, and pitfalls that task needs; however important, anything unrelated stays out, and the note's title is framed around that task
-6. File lists must be extracted from the conversation — never invented from memory
-7. Redact: API keys, passwords, and personal information must not be written
-8. Existing artifacts (plan docs, commits, issues): reference by path or link, never copy content
+6. **When the user's latest requirement changes what to do next, quote it verbatim in "Next"** — never paraphrase a direct instruction
+7. If this conversation itself began from a handoff note, add that note's path to a "Source of truth" section to keep the relay chain traceable
+8. File lists must be extracted from the conversation — never invented from memory
+9. Redact: API keys, passwords, and personal information must not be written
+10. Existing artifacts (plan docs, commits, issues): reference by path or link, never copy content
 
 **User's task for the next leg** (omit for a general summary):
 <fill in what the next leg should do here>
@@ -58,6 +63,6 @@ Edited: <extracted from the conversation, real paths>
 2. At the end of your reply, output a prompt code block that can be copied straight into a new conversation, with this fixed content (in the conversation's language):
 
 ```
-You are taking over a relayed task. Below is the handoff note from the previous session. Read it and start executing the "Next" section directly:
+You are taking over a relayed task. Below is the handoff note from the previous session. Read it fully, do not recap its contents, then start executing the "Next" section directly. Run `git status` first to reconcile the repo's actual state with the note; if they disagree, reconcile before acting.
 <full text of the handoff note>
 ```
