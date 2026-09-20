@@ -1,59 +1,63 @@
-# relayhand 通用核心提示词（手动粘贴版）
+# relayhand Universal Core Prompt (manual paste-in version)
 
-适用于**任何** AI 对话产品——不需要自定义命令功能，甚至下一个会话可以用别的产品。
+Works with **any** AI chat product — no custom-command feature needed, and the next session may even run in a different product.
 
-**用法**：把下面分隔线以下的整段内容，复制进当前这场想交接的对话并发送。若想为下一棒指定任务，把任务说明写在末尾"用户附加任务"处。AI 会产出接力文档和一个可复制提示词块，把那个块粘到新对话即可。
+**How to use**: copy everything below the divider into the conversation you want to hand off, and send it. To assign a task to the next leg, write it at the end, under "User's task for the next leg". The AI will produce a handoff note and a copy-paste prompt block; paste that block into the new conversation.
 
 ---
 
-请把本场对话整理成一份"接力文档"，让我可以在一个全新的对话里直接继续干活。
+Please organize this conversation into a "handoff note" so that I can continue working directly in a brand-new conversation.
 
-写作总纲：**整体克制，唯独"下一步"要详细。**
+Writing doctrine: **Restrained throughout; the "Next" section is the only place for detail.**
 
-## 模板（栏目没有内容就整节删掉，不硬凑）
+**Language: follow the conversation.** Write the handoff note and the copy-paste prompt in the language this conversation uses (mixed conversation → prefer the user's own language). One template serves every language.
+
+## Template (drop any section that has nothing to say — never pad)
+
+Section titles follow the conversation language; shown here in English:
 
 ```markdown
-# 接力：<一句话点明任务>
+# Handoff: <one sentence naming the task>
 
-## 目标
-<一句话：在构建/修复什么，为什么。超一句说明没吃透，重写>
+## Goal
+<one sentence: what is being built/fixed, and why. If it takes more than a sentence, you haven't distilled it — rewrite>
 
-## 状态
-- 已完成：<步骤清单，每条一行>
-- 进行中：<当前正在做什么>
-- 受阻：<障碍、悬而未决的问题>
+## State
+- Done: <checklist, one item per line>
+- In progress: <what is being worked on right now>
+- Blocked: <obstacles, open questions>
 
-## 关键决策
-<只记影响后续工作的技术选择及其原因>
+## Key decisions
+<only technical choices that affect later work, and why>
 
-## 下一步
-<按顺序列立即可执行的动作，写具体到可直接执行>
+## Next
+<immediately executable actions, in order, concrete enough to run as-is>
 
-## 文件
-读过：<从对话中真实提取>
-改过：<从对话中真实提取>
+## Files
+Read: <extracted from the conversation, real paths>
+Edited: <extracted from the conversation, real paths>
 ```
 
-## 写作纪律
+## Writing discipline
 
-1. 读者是下一个 agent，不是用户：写"接力棒"，不写"回顾录"
-2. 禁止叙述对话过程（"我们先讨论了…后来…"），只写结论性状态
-3. 只写事实，不写氛围；每个字都要对"接棒干活"有用
-4. "下一步"是唯一的详细区，其余栏目全部为它服务
-5. 若我附加了下一棒任务（见本消息末尾），任务就是过滤器：只总结该任务需要知道的背景、决策、文件、坑；与它无关的对话内容哪怕再重要也不写，文档标题围绕该任务命名
-6. 文件清单从对话中真实提取，不许凭印象编
-7. 脱敏：API key、密码、个人信息不得写入
-8. 已有产物（计划文档、代码提交、issue）只写路径或链接引用，不抄内容
+1. The reader is the next agent, not the user: write a "baton", not a "retrospective"
+2. Do not narrate the conversation ("we first discussed… then…"); only conclusive state
+3. Facts only, no vibes; every word must help the next leg do the work
+4. "Next" is the only section allowed detail; every other section serves it
+5. If I attach a task for the next leg (see the end of this message), the task is the filter: summarize only the background, decisions, files, and pitfalls that task needs; however important, anything unrelated stays out, and the note's title is framed around that task
+6. File lists must be extracted from the conversation — never invented from memory
+7. Redact: API keys, passwords, and personal information must not be written
+8. Existing artifacts (plan docs, commits, issues): reference by path or link, never copy content
 
-**用户附加任务**（无则做通用总结）：
-<在此填写下一棒要做的事>
+**User's task for the next leg** (omit for a general summary):
+<fill in what the next leg should do here>
 
-## 产出要求
+## Output requirements
 
-1. 在回复里完整展示接力文档全文，供我过目（我可能要求重写）
-2. 在回复末尾输出一个可直接复制到新对话的提示词代码块，内容固定为：
+1. Display the full handoff note in your reply for my review (I may ask for a rewrite)
+2. At the end of your reply, output a prompt code block that can be copied straight into a new conversation, with this fixed content (in the conversation's language):
 
 ```
-你接手的是一个接力任务。以下是上一场对话的交接文档，读完直接开始执行"下一步"部分：
-<接力文档全文>
+You are taking over a relayed task. Below is the handoff note from the previous session. Read it and start executing the "Next" section directly:
+<full text of the handoff note>
 ```

@@ -42,6 +42,5 @@
 
 ### 2026-09-20 双语化
 - README.md 改为英文主门面，新增 README-ZH.md（同构），顶部互相切换
-- 模板出英文版：claude-code/relayhand-en.md、universal/relayhand-en.md（用户拍板，传播链条完整优先）
 - README 用 Mermaid 图讲三件事：核心接力链路、接力棒栏目结构、安装使用路径（为录视频讲解服务）
-- 规矩更新：模板/README 改动必须中英同步
+- 模板合并为单一版（英文指令 + 语言跟随对话的纪律），当日曾拆中英两份模板、旋即撤回合并（理由见 DESIGN.md 决策日志）

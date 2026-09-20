@@ -89,6 +89,8 @@ irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/re
 | Cursor | 见 [adapters/cursor.md](adapters/cursor.md) |
 | 其他任何 AI 产品 | 打开 [universal/relayhand.md](universal/relayhand.md)，把分隔线以下整段复制进想交接的对话发送 |
 
+> **一份模板，全语言通用。** 模板指令是英文（提示词的通用语），但接力文档本身跟随你当前对话的语言——中文对话就产出中文接力文档，不用选版本装。
+
 ## 用法示例（Claude Code 版）
 
 ```

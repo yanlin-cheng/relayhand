@@ -60,7 +60,7 @@ Four design principles:
 ```mermaid
 flowchart TD
     Start{"Which AI product?"} -->|"Claude Code"| A["Install with one command<br>(see below)"]
-    Start -->|"Cline / Cursor / others"| B["Open universal/relayhand-en.md<br>copy everything below the divider"]
+    Start -->|"Cline / Cursor / others"| B["Open universal/relayhand.md<br>copy everything below the divider"]
     A --> C["Type /relayhand in a long session"]
     B --> D["Paste into the conversation you want to hand off, send"]
     C --> E["Review the handoff note<br>not happy? just say so — it rewrites"]
@@ -72,13 +72,13 @@ flowchart TD
 **Claude Code** — one command to install (Windows users: the PowerShell version):
 
 ```bash
-mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand-en.md -o ~/.claude/commands/relayhand.md
+mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
 ```
 
 ```powershell
 # Windows PowerShell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
-irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand-en.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
+irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
 ```
 
 **Other products** — no custom-command feature needed; open the file and copy-paste:
@@ -87,9 +87,9 @@ irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/re
 |---|---|
 | Cline | see [adapters/cline.md](adapters/cline.md) |
 | Cursor | see [adapters/cursor.md](adapters/cursor.md) |
-| Any other AI product | open [universal/relayhand-en.md](universal/relayhand-en.md), copy everything below the divider into the conversation you want to hand off |
+| Any other AI product | open [universal/relayhand.md](universal/relayhand.md), copy everything below the divider into the conversation you want to hand off |
 
-> Using Claude Code in Chinese? Install [claude-code/relayhand.md](claude-code/relayhand.md) instead — same command, Chinese template. The universal prompt also has a [Chinese version](universal/relayhand.md).
+> **One template, every language.** The command's instructions are in English (the lingua franca of prompts), but the handoff note itself is written in whatever language your conversation uses — Chinese conversation, Chinese handoff note. No need to pick a version.
 
 ## Usage examples (Claude Code)
 

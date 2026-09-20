@@ -1,91 +1,95 @@
 ---
-description: 接力：把当前对话压缩成面向下一棒的任务交接，输出可复制提示词
-argument-hint: "[下一棒侧重 / 跨产品，可省略]"
+description: Relay: compress the current conversation into a task handoff for the next session, and output a copy-paste prompt
+argument-hint: "[focus of the next leg / cross-product, optional]"
 disable-model-invocation: true
 ---
 
-# /relayhand —— 会话接力
+# /relayhand —— Session Relay
 
-把当前对话压缩成一根"接力棒"，让下一个新会话（或另一个 AI 产品的新对话）直接接干。
+Compress the current conversation into a "baton" so the next fresh session (or a new conversation in a different AI product) can pick up the work immediately.
 
-写作总纲（源自 Cline 压缩器的系统提示词）：**整体克制，唯独下一步要详细**。
+Writing doctrine (from Cline's compactor system prompt): **Restrained throughout, detailed only about the next step.**
 
-参数 $ARGUMENTS（可省略）：
-- 普通文字 = 下一棒要做的任务。此时文档为该任务量身定制（见写作纪律第 5 条）
-- 含"跨产品" = 额外输出内嵌版提示词
+**Language: follow the conversation.** Talk to the user and write the handoff note in the language the current conversation uses (mixed conversation → prefer the user's own language). One template serves every language.
 
-## 第一步：定位正本
+$ARGUMENTS (optional):
+- Plain text = the task for the next leg. The note is then tailored to that task (see writing discipline #5)
+- Contains "cross-product" (跨产品) = additionally output the embedded prompt
 
-当前对话的完整记录是 <家目录>/.claude/projects/ 下的一个 .jsonl 文件。优先在当前项目对应的目录（路径规则：项目路径中的特殊字符和非中文字符替换为 -）里找最新修改的 .jsonl；找不到就用 Bash 取全局最新修改的那个（当前会话正在持续写入，通常就是最新）。拿到路径记下来，第二步要用。
+## Step 1: Locate the source-of-truth transcript
 
-## 第二步：写接力文档
+The full record of the current conversation is a .jsonl file under <home>/.claude/projects/. Look first in the directory matching the current project (path rule: special and non-ASCII characters in the project path are replaced with -) for the most recently modified .jsonl; if not found, use Bash to take the most recently modified one globally (the current session is being written to continuously, so it is usually the newest). Note the path — Step 2 needs it.
 
-保存到操作系统临时目录下的 relayhand-<YYYYMMDD-HHmm>.md（Windows 为 %TEMP%，Linux/macOS 为 /tmp）。
+## Step 2: Write the handoff note
 
-### 模板（栏目没有内容就整节删掉，不硬凑）
+Save it to relayhand-<YYYYMMDD-HHmm>.md in the OS temp directory (%TEMP% on Windows, /tmp on Linux/macOS).
+
+### Template (drop any section that has nothing to say — never pad)
+
+Section titles follow the conversation language; shown here in English:
 
 ```markdown
-# 接力：<一句话点明任务>
+# Handoff: <one sentence naming the task>
 
-## 目标
-<一句话：在构建/修复什么，为什么。超一句说明没吃透，重写>
+## Goal
+<one sentence: what is being built/fixed, and why. If it takes more than a sentence, you haven't distilled it — rewrite>
 
-## 状态
-- 已完成：<步骤清单，每条一行>
-- 进行中：<当前正在做什么>
-- 受阻：<障碍、悬而未决的问题>
+## State
+- Done: <checklist, one item per line>
+- In progress: <what is being worked on right now>
+- Blocked: <obstacles, open questions>
 
-## 关键决策
-<只记影响后续工作的技术选择及其原因>
+## Key decisions
+<only technical choices that affect later work, and why>
 
-## 下一步
-<按顺序列立即可执行的动作，写具体到可直接执行>
-<$ARGUMENTS 侧重任务放本节最前>
+## Next
+<immediately executable actions, in order, concrete enough to run as-is>
+<the $ARGUMENTS focus goes at the top of this section>
 
-## 文件
-读过：<从对话中真实提取>
-改过：<从对话中真实提取>
+## Files
+Read: <extracted from the conversation, real paths>
+Edited: <extracted from the conversation, real paths>
 
-## 正本
-完整对话记录：<jsonl 路径>。本文档缺细节（某段讨论、报错原文）时，用 Grep 搜此文件。
+## Source of truth
+Full transcript: <jsonl path>. When this note lacks detail (a discussion, an error message), Grep that file.
 ```
 
-### 写作纪律
+### Writing discipline
 
-1. 读者是下一个 agent，不是用户：写"接力棒"，不写"回顾录"
-2. 禁止叙述对话过程（"我们先讨论了…后来…"），只写结论性状态
-3. 只写事实，不写氛围；每个字都要对"接棒干活"有用
-4. "下一步"是唯一的详细区，其余栏目全部为它服务
-5. **当 $ARGUMENTS 指定了下一棒任务时，任务就是过滤器**：只总结该任务需要知道的背景、决策、文件、坑；与它无关的对话内容哪怕再重要也不写，文档标题围绕该任务命名。没有指定任务时才做通用总结
-6. 文件清单从对话中真实提取，不许凭印象编
-7. 脱敏：API key、密码、个人信息不得写入
-8. 已有产物（计划文档、commit、issue）只写路径引用，不抄内容
+1. The reader is the next agent, not the user: write a "baton", not a "retrospective"
+2. Do not narrate the conversation ("we first discussed… then…"); only conclusive state
+3. Facts only, no vibes; every word must help the next leg do the work
+4. "Next" is the only section allowed detail; every other section serves it
+5. **When $ARGUMENTS names the next task, the task is the filter**: summarize only the background, decisions, files, and pitfalls that task needs; however important, anything unrelated stays out, and the note's title is framed around that task. Only with no specified task do the general summary
+6. File lists must be extracted from the conversation — never invented from memory
+7. Redact: API keys, passwords, and personal information must not be written
+8. Existing artifacts (plan docs, commits, issues): reference by path, never copy content
 
-## 第三步：展示
+## Step 3: Show
 
-在聊天里完整展示接力文档全文，供用户过目（用户不满意可要求重写）。
+Display the full handoff note in chat for review (rewrite on request).
 
-## 第四步：输出可复制提示词
+## Step 4: Output the copy-paste prompt
 
-回复末尾先给一行说明"复制下面这段到新对话即可"，然后输出代码块：
+At the end of the reply, first a one-line note "copy the following into a new conversation", then the code block (the prompt itself is also written in the conversation's language):
 
-**文件版（默认输出）**：
-
-```
-读取 <接力文档完整路径>，这是上一场对话的接力文档。先读完，然后直接开始执行"下一步"部分。
-```
-
-$ARGUMENTS 有侧重则追加一行：`本次侧重：$ARGUMENTS`
-
-**内嵌版（仅当 $ARGUMENTS 含"跨产品"时额外输出；自包含，可粘贴进任何 AI 产品的新对话）**：
+**File version (default output)**:
 
 ```
-你接手的是一个接力任务。以下是上一场对话的交接文档，读完直接开始执行"下一步"部分：
-<接力文档全文>
+Read <full path to the handoff note>. It is the handoff note from the previous session. Read it fully, then start executing the "Next" section directly.
 ```
 
-最后汇报两件事：文档路径、提示词已输出。
+If $ARGUMENTS carries a focus, append one line: `Focus this time: $ARGUMENTS`
 
-## 个性化扩展
+**Embedded version (only when $ARGUMENTS contains "cross-product" / 跨产品; self-contained, pasteable into any AI product's new conversation)**:
 
-本命令刻意保持通用，不含任何个人配置（知识库路径、本机专属目录等）。个人增强请加在自己机器的副本里，不要提交回仓库——分层设计见仓库 DESIGN.md。
+```
+You are taking over a relayed task. Below is the handoff note from the previous session. Read it and start executing the "Next" section directly:
+<full text of the handoff note>
+```
+
+Finally report two things: the note's path, and that the prompt is ready.
+
+## Personal extensions
+
+This command is deliberately generic and contains no personal configuration (knowledge-base paths, machine-specific directories, etc.). Add personal enhancements to your own local copy, never commit them back to the repository — see the layering design in the repository's DESIGN.md.
