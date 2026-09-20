@@ -1,63 +1,112 @@
-# relayhand —— 会话接力命令
+# relayhand — Session Relay Command
 
-跨 AI 产品的会话交接方案：把一场长对话压缩成一份面向"下一棒"的**接力文档** + **可复制提示词**，新对话粘贴即续。
+**English** | [简体中文](README-ZH.md)
 
-> **English**: relayhand turns a long AI coding session into a handoff note + a copy-paste prompt, so a fresh conversation (in any AI product) picks up where you left off. Install for Claude Code:
->
-> ```bash
-> mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
-> ```
->
-> Then type `/relayhand` in a long session. Other tools → [universal/relayhand.md](universal/relayhand.md) (paste-in prompt, works anywhere).
+relayhand turns a long AI coding session into a **handoff note** + a **copy-paste prompt**, so a fresh conversation picks up right where you left off — in any AI product.
 
-## 它解决什么问题
+## The problem it solves
 
-对话很长之后，原地压缩（各家 AI 的 compact 类功能）有两个硬伤：压缩后的上下文依然不小（还是慢），压缩即丢失（细节没了就没了）。
+Once a conversation runs long, in-place compaction (the `compact`-style features in today's AI tools) hits two hard limits:
 
-relayhand 的做法：
+- The compacted context is still large — still slow
+- Compaction loses detail — once gone, gone for good
 
-1. **摘要进新会话**——新对话上下文干净，快
-2. **正本不丢**——Claude Code 版会把完整对话记录（.jsonl）的路径写进文档，缺细节时新会话自己去搜原文（借鉴 Cline 的 sidecar 理念）
-3. **任务即过滤器**——接力时可以指定下一棒任务，文档只总结该任务需要知道的内容，不做泛泛的全文摘要
+relayhand takes a different route: **switch sessions, don't compress the session**.
 
-## 快速开始
+## How it works (30 seconds)
 
-**Claude Code**——一条命令装好（Windows 用 PowerShell 版）：
+```mermaid
+flowchart LR
+    A["Long conversation<br>getting slow; compact loses detail"] --> B["Run /relayhand"]
+    B --> C["① Handoff note<br>Goal / State / Key decisions / Next"]
+    B --> D["② Copy-paste prompt"]
+    C --> E["Open a new conversation"]
+    D --> E
+    E --> F["The new session reads it and continues<br>Missing detail? The source pointer leads back to the full transcript"]
+    F -. the conversation grows long again .-> B
+```
+
+Three key moves:
+
+1. **The summary goes into a fresh session** — clean context, fast
+2. **The source of truth is never lost** — the note carries the path of the full conversation transcript (.jsonl); when detail is missing, the new session greps the original (inspired by Cline's sidecar idea)
+3. **The task is the filter** — you can name the next leg's task at handoff time; the note then covers only what that task needs, instead of a generic everything-summary
+
+## What's inside the baton
+
+The handoff note is not a chat recap — it is a task handoff sheet written for the next agent:
+
+```text
+# Handoff: <one sentence naming the task>
+## Goal            ← one sentence: what is being built/fixed, and why
+## State           ← done / in progress / blocked
+## Key decisions   ← technical choices that affect later work, and why
+## Next            ← immediately executable actions        ★ the only detailed section
+## Files           ← read / edited (extracted from the real conversation)
+## Source of truth ← path to the full transcript; grep it when detail is missing
+```
+
+Four design principles:
+
+| Principle | In one sentence |
+|---|---|
+| **Restrained throughout, detailed only about the next step** | The template is organized by state, not by time — there is literally no slot for "here's what we discussed" storytelling |
+| **The task is the filter** | With `/relayhand refactor the login module`, the task decides what the note contains; however important, unrelated content stays out |
+| **The source of truth is never lost** | Summarize freely — the original transcript is untouched, and its pointer is written into the note |
+| **Born from real source code** | The template skeleton and the doctrine come from the actual compactor instructions in Cline's source — not from vibes |
+
+## Install & use
+
+```mermaid
+flowchart TD
+    Start{"Which AI product?"} -->|"Claude Code"| A["Install with one command<br>(see below)"]
+    Start -->|"Cline / Cursor / others"| B["Open universal/relayhand-en.md<br>copy everything below the divider"]
+    A --> C["Type /relayhand in a long session"]
+    B --> D["Paste into the conversation you want to hand off, send"]
+    C --> E["Review the handoff note<br>not happy? just say so — it rewrites"]
+    D --> E
+    E --> F["Copy the prompt at the end"]
+    F --> G["New conversation, paste, enter ⚡"]
+```
+
+**Claude Code** — one command to install (Windows users: the PowerShell version):
 
 ```bash
-mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
+mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand-en.md -o ~/.claude/commands/relayhand.md
 ```
 
 ```powershell
 # Windows PowerShell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
-irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
+irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand-en.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
 ```
 
-装完在长对话里输入 `/relayhand` 即可（详见下面"用法"）。
+**Other products** — no custom-command feature needed; open the file and copy-paste:
 
-**其他产品**——不用命令功能，打开文件复制粘贴即可：
-
-| 你用什么 | 拿法 |
+| What you use | How to get it |
 |---|---|
-| Cline | 见 [adapters/cline.md](adapters/cline.md) |
-| Cursor | 见 [adapters/cursor.md](adapters/cursor.md) |
-| 其他任何 AI 产品 | 打开 [universal/relayhand.md](universal/relayhand.md)，把分隔线以下整段复制进想交接的对话发送 |
+| Cline | see [adapters/cline.md](adapters/cline.md) |
+| Cursor | see [adapters/cursor.md](adapters/cursor.md) |
+| Any other AI product | open [universal/relayhand-en.md](universal/relayhand-en.md), copy everything below the divider into the conversation you want to hand off |
 
-## 用法（以 Claude Code 版为例）
+> Using Claude Code in Chinese? Install [claude-code/relayhand.md](claude-code/relayhand.md) instead — same command, Chinese template. The universal prompt also has a [Chinese version](universal/relayhand.md).
+
+## Usage examples (Claude Code)
 
 ```
-/relayhand                    # 通用总结：整场对话该知道的都提炼
-/relayhand 重构登录模块        # 任务定制：只捞该任务需要的背景/决策/文件/坑
-/relayhand 跨产品             # 额外输出可粘进其他 AI 产品的内嵌版提示词
+/relayhand                        # general summary: everything the next leg should know
+/relayhand refactor login module  # task-tailored: only the context/decisions/files/pitfalls that task needs
+/relayhand cross-product          # additionally output the embedded prompt for other AI products
 ```
 
-流程：跑命令 → 过目它展示的接力文档（不满意直接说，重写）→ 复制末尾提示词 → 开新对话粘贴回车。
+## Design rationale
 
-## 设计依据
+The template wasn't written on instinct — the skeleton and the doctrine of **"restrained throughout, detailed only about the next step"** are taken from the **actual compactor instructions in Cline's source code**. The design reasoning and decision log live in [DESIGN.md](DESIGN.md).
 
-模板不是凭感觉写的——骨架和"整体克制，唯独下一步要详细"的总纲抄自 **Cline 压缩器的真实源码指令**，设计推演过程见 [DESIGN.md](DESIGN.md)。
+## Contributing
 
-## 迭代
+This repository is the single source of truth for relayhand. Issues and PRs on the template and its discipline are welcome. The core principle: **restrained throughout, detailed only about the next step**.
 
-本仓库是 relayhand 的唯一源头。欢迎 issue / PR 反馈模板与纪律的改进。核心原则：**整体克制，唯独下一步要详细**。
+## License
+
+[MIT](LICENSE)

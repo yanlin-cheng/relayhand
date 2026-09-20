@@ -25,9 +25,8 @@
 
 ## 待办事项
 
-- [ ] 实战验证模板效果（跑真实长对话）
+- [ ] 实战验证模板效果（跑真实长对话，顺便把个人副本同步到 relayhand 新版）
 - [ ] 核实 Cline / Cursor 适配说明与最新官方文档是否一致
-- [ ] README 改造：加中英双语流程图/可视化讲解，方便录视频（2026-09-20 提出）
 - [ ] 用户说推才推 GitHub
 
 ## 更新日志
@@ -40,3 +39,9 @@
 - relay 是通用词、网上已有同名仓库，搜索易被淹没；改名为 relayhand，命令同步改 `/relayhand`
 - 文件改名：claude-code/relayhand.md、universal/relayhand.md；README 安装 URL 全部更新
 - 个人实战副本同步改名为 C:\Users\cyl\.claude\commands\relayhand.md
+
+### 2026-09-20 双语化
+- README.md 改为英文主门面，新增 README-ZH.md（同构），顶部互相切换
+- 模板出英文版：claude-code/relayhand-en.md、universal/relayhand-en.md（用户拍板，传播链条完整优先）
+- README 用 Mermaid 图讲三件事：核心接力链路、接力棒栏目结构、安装使用路径（为录视频讲解服务）
+- 规矩更新：模板/README 改动必须中英同步

@@ -16,4 +16,4 @@ Cline 支持通过 markdown 文件注册自定义斜杠命令（以你所用版�
 
 ## 核心提示词
 
-见 [universal/relayhand.md](../universal/relayhand.md)——原样复制，不要改动模板与纪律部分（它们的设计依据见 [../DESIGN.md](../DESIGN.md)）。
+见 [universal/relayhand.md](../universal/relayhand.md)——原样复制，不要改动模板与纪律部分（它们的设计依据见 [../DESIGN.md](../DESIGN.md)）。英文版核心提示词：[universal/relayhand-en.md](../universal/relayhand-en.md)。
