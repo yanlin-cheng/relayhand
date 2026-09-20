@@ -88,6 +88,28 @@ That's it — **install once**. From then on, every handoff is just running the 
 
 Prefer manual setup, or want per-product notes? See [adapters/cline.md](adapters/cline.md) and [adapters/cursor.md](adapters/cursor.md). No web access at all? Open [universal/relayhand.md](universal/relayhand.md) and copy everything below the divider into the conversation you want to hand off.
 
+### How to use — one command, two modes
+
+Once installed, relayhand is just a command you run when a conversation gets long:
+
+```
+/relayhand
+```
+
+It distills the current conversation into a handoff note for the next session. The real power: **tell it what the next session should do** —
+
+```
+/relayhand refactor the login module
+```
+
+Now the whole note is written **around that task**: only the context, decisions, files, and pitfalls the task needs — and the next steps laid out as concrete, immediately executable actions, so the new session starts working the moment you paste. Same conversation, different argument → a different baton.
+
+One more variant:
+
+```
+/relayhand cross-product   # additionally output an embedded, self-contained prompt for other AI products
+```
+
 > **One template, every language.** The command's instructions are in English (the lingua franca of prompts), but the handoff note itself is written in whatever language your conversation uses — Chinese conversation, Chinese handoff note. No need to pick a version.
 
 ## What's inside the baton
@@ -137,14 +159,6 @@ Small mechanisms that add up:
 | **Uncommitted counts as edited** | The Files section reports working-tree changes too, not just commits |
 | **Redaction built in** | API keys, passwords, and personal information never enter the note |
 | **Self-update check** | A run may diff the installed copy against the repo; a newer version is offered to the user and takes effect on the next invocation — never mid-run, and silently skipped offline |
-
-## Usage examples (Claude Code)
-
-```
-/relayhand                        # general summary: everything the next leg should know
-/relayhand refactor login module  # task-tailored: only the context/decisions/files/pitfalls that task needs
-/relayhand cross-product          # additionally output the embedded prompt for other AI products
-```
 
 ## Born from source code, cross-checked
 
