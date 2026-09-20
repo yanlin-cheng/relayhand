@@ -51,7 +51,7 @@ Section titles follow the conversation language; shown here in English:
 
 ## Files
 Read: <extracted from the conversation, real paths>
-Edited: <extracted from the conversation, real paths>
+Edited: <extracted from the conversation, real paths; uncommitted working-tree changes count too — never claim a repo file is untouched while its changes are still pending>
 
 ## Source of truth
 Full transcript: <jsonl path>. When this note lacks detail (a discussion, an error message), Grep that file.
