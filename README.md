@@ -2,6 +2,8 @@
 
 **English** | [简体中文](README-ZH.md)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 relayhand turns a long AI coding session into a **handoff note** + a **copy-paste prompt**, so a fresh conversation picks up right where you left off — in any AI product.
 
 ## The problem it solves
@@ -13,12 +15,20 @@ Once a conversation runs long, in-place compaction (the `compact`-style features
 
 relayhand takes a different route: **switch sessions, don't compress the session**.
 
+## Why switching beats compressing
+
+| | In-place compact | Reopen the raw transcript | **relayhand** |
+|---|---|---|---|
+| Context the next session carries | compressed summary, still large | everything | a task-shaped baton in a clean context |
+| Detail | lossy — once gone, gone | intact but buried | intact — the source pointer rides along |
+| Start-up cost | still slow | heavy | minimal |
+
 ## How it works (30 seconds)
 
 ```mermaid
 flowchart LR
     A["Long conversation<br>getting slow; compact loses detail"] --> B["Run /relayhand"]
-    B --> C["① Handoff note<br>Goal / State / Key decisions / Next"]
+    B --> C["① Handoff note<br>Goal / State / Pitfalls / Next"]
     B --> D["② Copy-paste prompt"]
     C --> E["Open a new conversation"]
     D --> E
@@ -55,6 +65,29 @@ Four design principles:
 | **The task is the filter** | With `/relayhand refactor the login module`, the task decides what the note contains; however important, unrelated content stays out |
 | **The source of truth is never lost** | Summarize freely — the original transcript is untouched, and its pointer is written into the note |
 | **Born from real source code** | The template skeleton and the doctrine come from the actual compactor instructions in Cline's source — not from vibes |
+
+## Engineered details
+
+The relay chain stays traceable: each baton's timestamp becomes the next session's name, so your session list lines up like a relay race.
+
+```mermaid
+flowchart LR
+    S1["Session 1<br>relayhand-0953"] -->|"/relayhand"| N1["baton<br>relayhand-1052.md"]
+    N1 -->|"paste into a new conversation —<br>the seed line names the session"| S2["Session 2<br>relayhand-1052"]
+    S2 -->|"/relayhand"| N2["baton<br>relayhand-1115.md"]
+    N2 --> S3["Session 3<br>relayhand-1115 …"]
+```
+
+Small mechanisms that add up:
+
+| Detail | What it does |
+|---|---|
+| **Naming seed** | The prompt's first line `Relay relayhand-<timestamp> — <task>` steers the new session's auto-title onto the relay chain (an optional `/rename` note below the block pins it exactly) |
+| **Reconcile before acting** | The prompt makes the new session run `git status` first — if the repo moved past the note, align before working |
+| **No recap** | The new session reads the note silently — reciting it back is pure token waste |
+| **Verbatim protection** | Your latest instruction is quoted word-for-word, never paraphrased into the summarizer's interpretation |
+| **Uncommitted counts as edited** | The Files section reports working-tree changes too, not just commits |
+| **Redaction built in** | API keys, passwords, and personal information never enter the note |
 
 ## Install & use
 
@@ -100,9 +133,13 @@ irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/re
 /relayhand cross-product          # additionally output the embedded prompt for other AI products
 ```
 
-## Design rationale
+## Born from source code, cross-checked
 
-The template wasn't written on instinct — the skeleton and the doctrine of **"restrained throughout, detailed only about the next step"** are taken from the **actual compactor instructions in Cline's source code**. The design reasoning and decision log live in [DESIGN.md](DESIGN.md).
+- The baton skeleton and the doctrine **"restrained throughout, detailed only about the next step"** are taken from the **actual compactor instructions in Cline's source** (`agentic-compaction.ts`, `compaction-shared.ts`)
+- **Pitfalls as a first-class section** is a converged choice: three independent handoff projects made it without knowing about each other. Three strangers reaching the same design is stronger evidence than any single argument
+- The micro-behaviors (no recap, verbatim protection) mirror the same fixes Claude Code shipped for its own compactor
+
+Full design reasoning and the decision log: [DESIGN.md](DESIGN.md).
 
 ## Contributing
 
