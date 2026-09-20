@@ -42,6 +42,54 @@ Three key moves:
 2. **The source of truth is never lost** — the note carries the path of the full conversation transcript (.jsonl); when detail is missing, the new session greps the original (inspired by Cline's sidecar idea)
 3. **The task is the filter** — you can name the next leg's task at handoff time; the note then covers only what that task needs, instead of a generic everything-summary
 
+## Install & use
+
+```mermaid
+flowchart TD
+    Start{"Which AI product?"} -->|"Claude Code"| A["One command install<br>(see below)"]
+    Start -->|"Codex / Cursor / Cline /<br>Qoder / WorkBuddy / …"| B["Copy the agent-install prompt<br>paste into any conversation"]
+    A --> E
+    B --> C["Your agent fetches the repo<br>and installs itself"]
+    C --> D["It reports back how to invoke it<br>e.g. /relayhand"]
+    D --> E["In a long session, run the command"]
+    E --> F["Review the baton → copy the prompt →<br>new conversation, paste, enter ⚡"]
+```
+
+**Claude Code** — one command to install (Windows users: the PowerShell version):
+
+```bash
+mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
+```
+
+```powershell
+# Windows PowerShell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
+irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
+```
+
+**Any other agent product — Codex, Cursor, Cline, Qoder, WorkBuddy, or anything else.** Don't copy-paste the prompt itself; let your agent do the install. Copy the block below into any conversation of that product **once** — the agent reads this repo and sets itself up:
+
+```text
+Install the "relayhand" session-relay command for me.
+1. Fetch https://github.com/yanlin-cheng/relayhand and read universal/relayhand.md —
+   the product-agnostic core prompt of a session handoff command.
+2. Find the closest thing to custom commands in your own product (a custom prompt /
+   command file, a rule, a workflow — check your own docs for the right place).
+3. Install that core prompt there under the name "relayhand", keeping its template
+   and writing discipline intact. Sections marked as Claude-Code-only enhancements
+   may be dropped.
+4. One-time install: afterwards I will invoke it whenever a conversation runs long.
+   Tell me the exact invocation and any limitations you found.
+5. If your product has no custom-command mechanism at all, say so and instead give
+   me the paste-in-per-session instructions from the repo.
+```
+
+That's it — **install once**. From then on, every handoff is just running the command (e.g. `/relayhand`), never re-pasting anything.
+
+Prefer manual setup, or want per-product notes? See [adapters/cline.md](adapters/cline.md) and [adapters/cursor.md](adapters/cursor.md). No web access at all? Open [universal/relayhand.md](universal/relayhand.md) and copy everything below the divider into the conversation you want to hand off.
+
+> **One template, every language.** The command's instructions are in English (the lingua franca of prompts), but the handoff note itself is written in whatever language your conversation uses — Chinese conversation, Chinese handoff note. No need to pick a version.
+
 ## What's inside the baton
 
 The handoff note is not a chat recap — it is a task handoff sheet written for the next agent:
@@ -88,42 +136,6 @@ Small mechanisms that add up:
 | **Verbatim protection** | Your latest instruction is quoted word-for-word, never paraphrased into the summarizer's interpretation |
 | **Uncommitted counts as edited** | The Files section reports working-tree changes too, not just commits |
 | **Redaction built in** | API keys, passwords, and personal information never enter the note |
-
-## Install & use
-
-```mermaid
-flowchart TD
-    Start{"Which AI product?"} -->|"Claude Code"| A["Install with one command<br>(see below)"]
-    Start -->|"Cline / Cursor / others"| B["Open universal/relayhand.md<br>copy everything below the divider"]
-    A --> C["Type /relayhand in a long session"]
-    B --> D["Paste into the conversation you want to hand off, send"]
-    C --> E["Review the handoff note<br>not happy? just say so — it rewrites"]
-    D --> E
-    E --> F["Copy the prompt at the end"]
-    F --> G["New conversation, paste, enter ⚡"]
-```
-
-**Claude Code** — one command to install (Windows users: the PowerShell version):
-
-```bash
-mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
-```
-
-```powershell
-# Windows PowerShell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
-irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
-```
-
-**Other products** — no custom-command feature needed; open the file and copy-paste:
-
-| What you use | How to get it |
-|---|---|
-| Cline | see [adapters/cline.md](adapters/cline.md) |
-| Cursor | see [adapters/cursor.md](adapters/cursor.md) |
-| Any other AI product | open [universal/relayhand.md](universal/relayhand.md), copy everything below the divider into the conversation you want to hand off |
-
-> **One template, every language.** The command's instructions are in English (the lingua franca of prompts), but the handoff note itself is written in whatever language your conversation uses — Chinese conversation, Chinese handoff note. No need to pick a version.
 
 ## Usage examples (Claude Code)
 

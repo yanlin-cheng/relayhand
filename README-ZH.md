@@ -42,6 +42,53 @@ flowchart LR
 2. **正本不丢**——接力文档里写着完整对话记录（.jsonl）的路径，缺细节时新会话自己去搜原文（借鉴 Cline 的 sidecar 理念）
 3. **任务即过滤器**——接力时可以指定下一棒任务，文档只总结该任务需要知道的内容，不做泛泛的全文摘要
 
+## 安装与使用
+
+```mermaid
+flowchart TD
+    Start{"你用什么 AI 产品？"} -->|"Claude Code"| A["一条命令安装<br>（见下方命令）"]
+    Start -->|"Codex / Cursor / Cline /<br>Qoder / WorkBuddy / …"| B["复制 Agent 安装提示词<br>粘进任意一场对话"]
+    A --> E
+    B --> C["你的 Agent 自己读仓库<br>自己完成安装"]
+    C --> D["它回报调用方式<br>比如 /relayhand"]
+    D --> E["长对话里跑这条命令"]
+    E --> F["过目接力棒 → 复制提示词 →<br>开新对话，粘贴，回车 ⚡"]
+```
+
+**Claude Code**——一条命令装好（Windows 用 PowerShell 版）：
+
+```bash
+mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
+```
+
+```powershell
+# Windows PowerShell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
+irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
+```
+
+**其他 Agent 产品——Codex、Cursor、Cline、Qoder、WorkBuddy 或任何其他产品。** 别复制提示词本身，让 Agent 自己动手装。把下面的块复制进该产品的**任意一场对话**（仅此一次），Agent 会自己读仓库、自己完成安装：
+
+```text
+帮我安装 "relayhand" 会话接力命令。
+1. 打开 https://github.com/yanlin-cheng/relayhand 并阅读 universal/relayhand.md——
+   它是一个会话交接命令的通用核心提示词，不绑定任何产品。
+2. 在你自己的产品里找到最接近"自定义命令"的机制（自定义提示词/命令文件、规则、
+   工作流均可——以你自己的文档为准，确定该放在哪）。
+3. 把核心提示词以 "relayhand" 之名安装进去，模板与写作纪律保持原样；
+   标注为 Claude Code 专属增强的段落可以删去。
+4. 这是一次性安装：之后我在对话变长时随时调用它。请告诉我确切的调用方式，
+   以及你安装时发现的任何限制。
+5. 如果你所在的产品完全没有自定义命令机制，直说，并把仓库里的"逐次粘贴"
+   使用说明拿给我。
+```
+
+装完就结束了——**一次安装，长期使用**。之后每次交接都只是跑一条命令（如 `/relayhand`），不再需要复制粘贴任何东西。
+
+想手动安装，或想看单产品说明？见 [adapters/cline.md](adapters/cline.md) 与 [adapters/cursor.md](adapters/cursor.md)。所在环境完全无法联网？打开 [universal/relayhand.md](universal/relayhand.md)，把分隔线以下整段复制进想交接的对话发送。
+
+> **一份模板，全语言通用。** 模板指令是英文（提示词的通用语），但接力文档本身跟随你当前对话的语言——中文对话就产出中文接力文档，不用选版本装。
+
 ## 一根接力棒里有什么
 
 接力文档不是聊天回顾，是一份交给下一个 agent 的任务交接单：
@@ -88,42 +135,6 @@ flowchart LR
 | **原话逐字保护** | 你的最新指令逐字引用，绝不被"消化"成总结者的转述 |
 | **未提交也算改过** | 文件栏连工作区未 commit 的改动一并报告，不只盯提交 |
 | **脱敏内建** | API key、密码、个人信息不进接力文档 |
-
-## 安装与使用
-
-```mermaid
-flowchart TD
-    Start{"你用什么 AI 产品？"} -->|"Claude Code"| A["一条命令安装<br>（见下方命令）"]
-    Start -->|"Cline / Cursor / 其他"| B["打开 universal/relayhand.md<br>复制分隔线以下整段"]
-    A --> C["长对话里输入 /relayhand"]
-    B --> D["粘进想交接的对话，发送"]
-    C --> E["过目接力文档<br>不满意直接说，重写"]
-    D --> E
-    E --> F["复制末尾提示词"]
-    F --> G["开新对话，粘贴，回车 ⚡"]
-```
-
-**Claude Code**——一条命令装好（Windows 用 PowerShell 版）：
-
-```bash
-mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
-```
-
-```powershell
-# Windows PowerShell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
-irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
-```
-
-**其他产品**——不用命令功能，打开文件复制粘贴即可：
-
-| 你用什么 | 拿法 |
-|---|---|
-| Cline | 见 [adapters/cline.md](adapters/cline.md) |
-| Cursor | 见 [adapters/cursor.md](adapters/cursor.md) |
-| 其他任何 AI 产品 | 打开 [universal/relayhand.md](universal/relayhand.md)，把分隔线以下整段复制进想交接的对话发送 |
-
-> **一份模板，全语言通用。** 模板指令是英文（提示词的通用语），但接力文档本身跟随你当前对话的语言——中文对话就产出中文接力文档，不用选版本装。
 
 ## 用法示例（Claude Code 版）
 

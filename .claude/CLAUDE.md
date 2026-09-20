@@ -63,3 +63,8 @@
 ### 2026-09-20 README 门面升级
 - 中英 README 四处升级：三方案对比表、精工细节节（接力链图 + 六微机制表）、"源自源码交叉验证"证据节、MIT 徽章
 - 依据见 DESIGN.md 当日条目；此为推送前打磨
+
+### 2026-09-20 安装流程重构：Agent 自装
+- 用户拍板：非 Claude Code 产品不再"逐次复制粘贴"，改为一段可一键复制的 Agent 安装提示词——Agent 自己读仓库自己装，一次安装长期跑命令
+- 产品行只硬编码 Claude Code；Codex/Cursor/Cline/Qoder/WorkBuddy 等统一走 Agent 安装提示词（理由见 DESIGN.md 当日条目）
+- "安装与使用"节上移至第四节
