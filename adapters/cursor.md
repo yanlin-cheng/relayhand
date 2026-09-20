@@ -2,7 +2,7 @@
 
 ## 挂载方式
 
-Cursor 支持自定义斜杠命令（以你所用版本的官方文档为准，命令目录与语法可能随版本变化）。把 [universal/relay.md](../universal/relay.md) 中分隔线以下的核心提示词保存为一个命令文件即可。
+Cursor 支持自定义斜杠命令（以你所用版本的官方文档为准，命令目录与语法可能随版本变化）。把 [universal/relayhand.md](../universal/relayhand.md) 中分隔线以下的核心提示词保存为一个命令文件即可。
 
 ## 适配要点
 
@@ -12,4 +12,4 @@ Cursor 支持自定义斜杠命令（以你所用版本的官方文档为准，�
 
 ## 核心提示词
 
-见 [universal/relay.md](../universal/relay.md)——原样复制，不要改动模板与纪律部分（它们的设计依据见 [../DESIGN.md](../DESIGN.md)）。
+见 [universal/relayhand.md](../universal/relayhand.md)——原样复制，不要改动模板与纪律部分（它们的设计依据见 [../DESIGN.md](../DESIGN.md)）。

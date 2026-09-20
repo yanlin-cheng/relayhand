@@ -1,4 +1,4 @@
-# relay — 项目记忆
+# relayhand — 项目记忆
 
 ## 项目概述
 
@@ -12,7 +12,7 @@
 
 本项目是内容/提示词项目，日常任务轻量：
 
-- 改模板、改纪律 → 直接改 `universal/relay.md` + DESIGN.md 决策日志补记，不需求助技能
+- 改模板、改纪律 → 直接改 `universal/relayhand.md` + DESIGN.md 决策日志补记，不需求助技能
 - 涉及"要不要加新机制"的方案讨论 → 先读 DESIGN.md 第三节，看是否已有取舍记录，避免重新论证
 - 上 GitHub、开源协作相关经验 → 参考知识库 `开源项目经验/`
 
@@ -21,11 +21,13 @@
 - 模板与总纲源自 Cline 源码（DESIGN.md 第二节有原文证据），不要凭感觉改
 - 知识库日志默认关闭（用户 2026-09-19 拍板）；个人增强层不进仓库
 - 自动注入（钩子）与自动开新对话（扩展）方案均被否，理由在 DESIGN.md 第三节
+- 2026-09-20 改名 relayhand（relay 是通用词搜索易撞车），命令同步改 /relayhand，理由见 DESIGN.md 决策日志
 
 ## 待办事项
 
 - [ ] 实战验证模板效果（跑真实长对话）
 - [ ] 核实 Cline / Cursor 适配说明与最新官方文档是否一致
+- [ ] README 改造：加中英双语流程图/可视化讲解，方便录视频（2026-09-20 提出）
 - [ ] 用户说推才推 GitHub
 
 ## 更新日志
@@ -33,3 +35,8 @@
 ### 2026-09-19 仓库初建
 - 从个人命令 `/relay` 升级为分发仓库：README、DESIGN、claude-code 版、universal 版、两个适配器
 - 个人实战副本（C:\Users\cyl\.claude\commands\relay.md）保留知识库增强层，与仓库通用版并存
+
+### 2026-09-20 改名 relayhand
+- relay 是通用词、网上已有同名仓库，搜索易被淹没；改名为 relayhand，命令同步改 `/relayhand`
+- 文件改名：claude-code/relayhand.md、universal/relayhand.md；README 安装 URL 全部更新
+- 个人实战副本同步改名为 C:\Users\cyl\.claude\commands\relayhand.md

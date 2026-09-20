@@ -6,7 +6,7 @@ Cline 自带 `/newtask`（最新版已改为 `/compact` 的别名，做原地压
 
 ## 挂载方式
 
-Cline 支持通过 markdown 文件注册自定义斜杠命令（以你所用版本的官方文档为准，目录名和识别规则可能随版本变化）。把 [universal/relay.md](../universal/relay.md) 中分隔线以下的核心提示词保存为一个命令文件即可。
+Cline 支持通过 markdown 文件注册自定义斜杠命令（以你所用版本的官方文档为准，目录名和识别规则可能随版本变化）。把 [universal/relayhand.md](../universal/relayhand.md) 中分隔线以下的核心提示词保存为一个命令文件即可。
 
 ## 适配要点
 
@@ -16,4 +16,4 @@ Cline 支持通过 markdown 文件注册自定义斜杠命令（以你所用版�
 
 ## 核心提示词
 
-见 [universal/relay.md](../universal/relay.md)——原样复制，不要改动模板与纪律部分（它们的设计依据见 [../DESIGN.md](../DESIGN.md)）。
+见 [universal/relayhand.md](../universal/relayhand.md)——原样复制，不要改动模板与纪律部分（它们的设计依据见 [../DESIGN.md](../DESIGN.md)）。

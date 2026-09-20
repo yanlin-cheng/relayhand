@@ -4,7 +4,7 @@ argument-hint: "[下一棒侧重 / 跨产品，可省略]"
 disable-model-invocation: true
 ---
 
-# /relay —— 会话接力
+# /relayhand —— 会话接力
 
 把当前对话压缩成一根"接力棒"，让下一个新会话（或另一个 AI 产品的新对话）直接接干。
 
@@ -20,7 +20,7 @@ disable-model-invocation: true
 
 ## 第二步：写接力文档
 
-保存到操作系统临时目录下的 relay-<YYYYMMDD-HHmm>.md（Windows 为 %TEMP%，Linux/macOS 为 /tmp）。
+保存到操作系统临时目录下的 relayhand-<YYYYMMDD-HHmm>.md（Windows 为 %TEMP%，Linux/macOS 为 /tmp）。
 
 ### 模板（栏目没有内容就整节删掉，不硬凑）
 
