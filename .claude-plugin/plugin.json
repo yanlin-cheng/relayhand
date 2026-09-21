@@ -1,6 +1,6 @@
 {
   "name": "relayhand",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Session relay for Claude Code: compress a long conversation into a task-shaped handoff note plus a copy-paste prompt, so a fresh session picks up instantly. Template and doctrine born from Cline's compactor source.",
   "author": {
     "name": "yanlin-cheng",

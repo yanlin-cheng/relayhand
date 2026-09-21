@@ -114,4 +114,4 @@ Finally report two things: the note's path, and that the prompt is ready.
 
 ## Personal extensions
 
-This command is deliberately generic and contains no personal configuration (knowledge-base paths, machine-specific directories, etc.). Add personal enhancements to your own local copy, never commit them back to the repository — see the layering design in the repository's DESIGN.md.
+This command is deliberately generic and contains no personal configuration (knowledge-base paths, machine-specific directories, etc.). Add personal enhancements to your own local copy only — never commit them back to the repository.

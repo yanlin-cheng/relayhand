@@ -23,6 +23,7 @@
 - 自动注入（钩子）与自动开新对话（扩展）方案均被否，理由在 DESIGN.md 第三节
 - 2026-09-20 改名 relayhand（relay 是通用词搜索易撞车），命令同步改 /relayhand，理由见 DESIGN.md 决策日志
 - 2026-09-21 插件化（仓库即市场 + 插件）；形态定 command 不做 skill；命名三层：市场 yanlin-cheng / 插件 relayhand / 命令 /relayhand，理由见 DESIGN.md 决策日志
+- 2026-09-21 起 DESIGN.md 私有化：不随仓库分发、已从全部 git 历史抹除；决策日志只在本机维护，仓库内"见 DESIGN.md"均指本机文件
 
 ## 待办事项
 
@@ -82,3 +83,7 @@
 - 对照 Matt Pocock handoff 技能暴露的两块长板当日补齐；决策与依据记 DESIGN.md 决策日志当日条目
 - Suggested skills 栏拍板只进 commands/ 版（Claude Code 增强层），universal 版不收；version 两处 bump 1.0.0 → 1.1.0
 - 个人副本同步：加"建议技能"栏 + 修正第零步正本 URL（claude-code/ → commands/，上轮漏同步）
+
+### 2026-09-21 review 修复 + DESIGN.md 私有化
+- review 窗口三项结论当日修复提交（README 重复标题、.gitignore 补本地日志/、DESIGN 序号笔误）
+- 用户拍板 DESIGN.md 私有化：退出跟踪 + 历史抹除 + force push，决策依据记 DESIGN.md 当日条目；门面（README 双语、模板、CLAUDE.md）引用全部改为自足表述；version bump 1.1.0 → 1.1.1（模板 Personal extensions 节去 DESIGN.md 引用）

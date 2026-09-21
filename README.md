@@ -184,8 +184,6 @@ Small mechanisms that add up:
 - **Pitfalls as a first-class section** is a converged choice: three independent handoff projects made it without knowing about each other. Three strangers reaching the same design is stronger evidence than any single argument
 - The micro-behaviors (no recap, verbatim protection) mirror the same fixes Claude Code shipped for its own compactor
 
-Full design reasoning and the decision log: [DESIGN.md](DESIGN.md).
-
 ## Contributing
 
 This repository is the single source of truth for relayhand. Issues and PRs on the template and its discipline are welcome. The core principle: **restrained throughout, detailed only about the next step**.
