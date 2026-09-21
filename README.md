@@ -33,8 +33,6 @@ relayhand is for handing work **out of the current session**. Other situations h
 
 ## How it works (30 seconds)
 
-## How it works (30 seconds)
-
 ```mermaid
 flowchart LR
     A["Long conversation<br>getting slow; compact loses detail"] --> B["Run /relayhand"]

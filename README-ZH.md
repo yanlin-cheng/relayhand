@@ -33,8 +33,6 @@ relayhand 干的是"把工作**交出当前会话**"这件事，下面这些场�
 
 ## 它是怎么工作的（30 秒看懂）
 
-## 它是怎么工作的（30 秒看懂）
-
 ```mermaid
 flowchart LR
     A["长对话<br>越聊越慢，compact 又丢细节"] --> B["跑 /relayhand"]
