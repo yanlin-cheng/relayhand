@@ -28,7 +28,7 @@ relayhand/
 - `commands/relayhand.md` 允许用 Claude Code 专属机制，但不得含任何个人路径、个人知识库配置
 - 发版必 bump `.claude-plugin/plugin.json` 与 `marketplace.json` 里的 version 字段（声明了 version 不 bump，插件用户会一直用缓存旧版）
 - 模板或纪律的任何改动：先在 DESIGN.md 决策日志记一笔（为什么改），再改文件（DESIGN.md 为本地决策日志，2026-09-21 起不随仓库分发，仓库内引用仅指本机文件）
-- 本机实战副本在 `C:\Users\cyl\.claude\commands\relayhand.md`（含知识库增强层），仓库改动后手动同步过去
+- 本机实战副本在 `~/.claude/commands/relayhand.md`（含知识库增强层），仓库改动后手动同步过去
 - 模板改动必须实测验证：找一场真实长对话跑 /relayhand，检查产出质量再定稿
 - 提交信息用中文，说清"改了什么、为什么"
 

@@ -37,12 +37,12 @@
 
 ### 2026-09-19 仓库初建
 - 从个人命令 `/relay` 升级为分发仓库：README、DESIGN、claude-code 版、universal 版、两个适配器
-- 个人实战副本（C:\Users\cyl\.claude\commands\relay.md）保留知识库增强层，与仓库通用版并存
+- 个人实战副本（~/.claude/commands/relay.md）保留知识库增强层，与仓库通用版并存
 
 ### 2026-09-20 改名 relayhand
 - relay 是通用词、网上已有同名仓库，搜索易被淹没；改名为 relayhand，命令同步改 `/relayhand`
 - 文件改名：claude-code/relayhand.md、universal/relayhand.md；README 安装 URL 全部更新
-- 个人实战副本同步改名为 C:\Users\cyl\.claude\commands\relayhand.md
+- 个人实战副本同步改名为 ~/.claude/commands/relayhand.md
 
 ### 2026-09-20 双语化
 - README.md 改为英文主门面，新增 README-ZH.md（同构），顶部互相切换
