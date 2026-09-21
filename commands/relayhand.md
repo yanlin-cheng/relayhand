@@ -55,6 +55,9 @@ Section titles follow the conversation language; shown here in English:
 ## Pitfalls (do not repeat)
 <failed attempts and why they failed; debugging conclusions as symptom → root cause → fix>
 
+## Suggested skills
+<skills the next agent should invoke via the Skill tool to execute "Next"; one per line, a few words on why; drop this section entirely if none>
+
 ## Next
 <immediately executable actions, in order, concrete enough to run as-is>
 <the $ARGUMENTS focus goes at the top of this section>

@@ -34,4 +34,4 @@ relayhand/
 
 ## 当前阶段
 
-初版建成（2026-09-19），2026-09-20 由 relay 改名 relayhand（原因见 DESIGN.md 决策日志）。2026-09-21 插件化：仓库即市场 + 插件（yanlin-cheng 市场名 / relayhand 插件名 / /relayhand 命令名），阶段二规划见 DESIGN.md 决策日志。待实战验证：模板总结质量、任务过滤效果、插件安装流程。
+初版建成（2026-09-19），2026-09-20 由 relay 改名 relayhand（原因见 DESIGN.md 决策日志）。2026-09-21 插件化：仓库即市场 + 插件（yanlin-cheng 市场名 / relayhand 插件名 / /relayhand 命令名），阶段二规划见 DESIGN.md 决策日志；同日补齐 handoff 对比暴露的两块长板（模板 Suggested skills 栏、README"何时不用"边界节，见 DESIGN.md 当日条目）。待实战验证：模板总结质量、任务过滤效果、插件安装流程。

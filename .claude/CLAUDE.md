@@ -26,9 +26,8 @@
 
 ## 待办事项
 
-- [ ] 实战验证模板效果（跑真实长对话；个人副本已于 2026-09-20 同步到内核优化 1-5 新版）
+- [ ] 实战验证模板效果（跑真实长对话；个人副本已于 2026-09-20 同步到内核优化 1-5 新版，2026-09-21 同步加 Suggested skills 栏）
 - [ ] 核实 Cline / Cursor 适配说明与最新官方文档是否一致
-- [ ] 补两块 handoff 对比暴露的长板：模板加 Suggested skills 栏、README 加"何时不用 relayhand"边界节（DESIGN.md 2026-09-21 条目遗留待办）
 - [ ] 阶段二（暂缓）：第二个可发布工具成型时建 yanlin-cheng 独立市场仓库收编各插件
 - [ ] 推送后实测插件安装流程（/plugin marketplace add yanlin-cheng/relayhand）
 - [ ] 用户说推才推 GitHub
@@ -78,3 +77,8 @@
 - 新增 .claude-plugin/plugin.json + marketplace.json（市场名 yanlin-cheng，插件名 relayhand，source "./"）；claude-code/relayhand.md 迁移至 commands/relayhand.md
 - README 双语安装节改为插件两行命令为主、裸文件 curl 降为退路；Step 0 自检加"插件安装跳过"并更新 URL
 - 发版纪律新增：version 字段必 bump；阶段二规划记入 DESIGN.md，暂不执行
+
+### 2026-09-21 补长板：Suggested skills 栏 + "何时不用 relayhand"边界节
+- 对照 Matt Pocock handoff 技能暴露的两块长板当日补齐；决策与依据记 DESIGN.md 决策日志当日条目
+- Suggested skills 栏拍板只进 commands/ 版（Claude Code 增强层），universal 版不收；version 两处 bump 1.0.0 → 1.1.0
+- 个人副本同步：加"建议技能"栏 + 修正第零步正本 URL（claude-code/ → commands/，上轮漏同步）

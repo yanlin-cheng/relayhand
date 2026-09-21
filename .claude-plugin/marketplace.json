@@ -11,7 +11,7 @@
       "name": "relayhand",
       "source": "./",
       "description": "Session relay: compress a long conversation into a task-shaped handoff note plus a copy-paste prompt, so a fresh session picks up instantly. Born from Cline's compactor source.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "yanlin-cheng",
         "url": "https://github.com/yanlin-cheng"

@@ -23,6 +23,14 @@ relayhand takes a different route: **switch sessions, don't compress the session
 | Detail | lossy — once gone, gone | intact but buried | intact — the source pointer rides along |
 | Start-up cost | still slow | heavy | minimal |
 
+## When NOT to use relayhand
+
+relayhand is for handing work **out of the current session**. Other situations have better tools:
+
+- **Same task, same session, just getting heavy** → `/compact`. In-place compression is the right call; switching sessions is overkill.
+- **Task is done or throwaway** → just open a new conversation (`/clear`). Nothing worth handing off.
+- **The work must survive this session — or move to another AI product** → that's relayhand's job.
+
 ## How it works (30 seconds)
 
 ## How it works (30 seconds)
@@ -133,6 +141,7 @@ The handoff note is not a chat recap — it is a task handoff sheet written for 
 ## State           ← done / in progress / blocked
 ## Key decisions   ← technical choices that affect later work, and why
 ## Pitfalls        ← failed attempts + why; debugging: symptom → root cause → fix
+## Suggested skills ← skills the next leg should invoke (Claude Code version)
 ## Next            ← immediately executable actions        ★ the only detailed section
 ## Files           ← read / edited (extracted from the real conversation)
 ## Source of truth ← path to the full transcript; grep it when detail is missing
