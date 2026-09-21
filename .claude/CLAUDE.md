@@ -22,11 +22,15 @@
 - 知识库日志默认关闭（用户 2026-09-19 拍板）；个人增强层不进仓库
 - 自动注入（钩子）与自动开新对话（扩展）方案均被否，理由在 DESIGN.md 第三节
 - 2026-09-20 改名 relayhand（relay 是通用词搜索易撞车），命令同步改 /relayhand，理由见 DESIGN.md 决策日志
+- 2026-09-21 插件化（仓库即市场 + 插件）；形态定 command 不做 skill；命名三层：市场 yanlin-cheng / 插件 relayhand / 命令 /relayhand，理由见 DESIGN.md 决策日志
 
 ## 待办事项
 
 - [ ] 实战验证模板效果（跑真实长对话；个人副本已于 2026-09-20 同步到内核优化 1-5 新版）
 - [ ] 核实 Cline / Cursor 适配说明与最新官方文档是否一致
+- [ ] 补两块 handoff 对比暴露的长板：模板加 Suggested skills 栏、README 加"何时不用 relayhand"边界节（DESIGN.md 2026-09-21 条目遗留待办）
+- [ ] 阶段二（暂缓）：第二个可发布工具成型时建 yanlin-cheng 独立市场仓库收编各插件
+- [ ] 推送后实测插件安装流程（/plugin marketplace add yanlin-cheng/relayhand）
 - [ ] 用户说推才推 GitHub
 
 ## 更新日志
@@ -68,3 +72,9 @@
 - 用户拍板：非 Claude Code 产品不再"逐次复制粘贴"，改为一段可一键复制的 Agent 安装提示词——Agent 自己读仓库自己装，一次安装长期跑命令
 - 产品行只硬编码 Claude Code；Codex/Cursor/Cline/Qoder/WorkBuddy 等统一走 Agent 安装提示词（理由见 DESIGN.md 当日条目）
 - "安装与使用"节上移至第四节
+
+### 2026-09-21 插件化：仓库即市场 + 插件（阶段一）
+- 起因：抖音评论拿 Matt Pocock 的 handoff 技能对比本项目；调研发现对手走官方插件市场分发，且 superpowers / mattpocock 两个标本同用"仓库即市场 + 插件（source "./"）"模式
+- 新增 .claude-plugin/plugin.json + marketplace.json（市场名 yanlin-cheng，插件名 relayhand，source "./"）；claude-code/relayhand.md 迁移至 commands/relayhand.md
+- README 双语安装节改为插件两行命令为主、裸文件 curl 降为退路；Step 0 自检加"插件安装跳过"并更新 URL
+- 发版纪律新增：version 字段必 bump；阶段二规划记入 DESIGN.md，暂不执行

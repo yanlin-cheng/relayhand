@@ -1,0 +1,20 @@
+{
+  "name": "relayhand",
+  "version": "1.0.0",
+  "description": "Session relay for Claude Code: compress a long conversation into a task-shaped handoff note plus a copy-paste prompt, so a fresh session picks up instantly. Template and doctrine born from Cline's compactor source.",
+  "author": {
+    "name": "yanlin-cheng",
+    "url": "https://github.com/yanlin-cheng"
+  },
+  "homepage": "https://github.com/yanlin-cheng/relayhand",
+  "repository": "https://github.com/yanlin-cheng/relayhand",
+  "license": "MIT",
+  "keywords": [
+    "handoff",
+    "session",
+    "context",
+    "relay",
+    "compact",
+    "productivity"
+  ]
+}

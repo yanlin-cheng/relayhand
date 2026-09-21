@@ -25,6 +25,8 @@ relayhand takes a different route: **switch sessions, don't compress the session
 
 ## How it works (30 seconds)
 
+## How it works (30 seconds)
+
 ```mermaid
 flowchart LR
     A["Long conversation<br>getting slow; compact loses detail"] --> B["Run /relayhand"]
@@ -46,7 +48,7 @@ Three key moves:
 
 ```mermaid
 flowchart TD
-    Start{"Which AI product?"} -->|"Claude Code"| A["One command install<br>(see below)"]
+    Start{"Which AI product?"} -->|"Claude Code"| A["Plugin install<br>two lines (see below)"]
     Start -->|"Codex / Cursor / Cline /<br>Qoder / WorkBuddy / …"| B["Copy the agent-install prompt<br>paste into any conversation"]
     A --> E
     B --> C["Your agent fetches the repo<br>and installs itself"]
@@ -55,16 +57,25 @@ flowchart TD
     E --> F["Review the baton → copy the prompt →<br>new conversation, paste, enter ⚡"]
 ```
 
-**Claude Code** — one command to install (Windows users: the PowerShell version):
+**Claude Code** — install as a plugin (in a Claude Code session, run):
+
+```
+/plugin marketplace add yanlin-cheng/relayhand
+/plugin install relayhand@yanlin-cheng
+```
+
+That's it — the command ships as a plugin, so it updates through the plugin system on its own; run `/relayhand` in any session.
+
+Prefer a plain file, or on an older version without plugin support? One command still works (Windows users: the PowerShell version):
 
 ```bash
-mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
+mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md -o ~/.claude/commands/relayhand.md
 ```
 
 ```powershell
 # Windows PowerShell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
-irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
+irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
 ```
 
 **Any other agent product — Codex, Cursor, Cline, Qoder, WorkBuddy, or anything else.** Don't copy-paste the prompt itself; let your agent do the install. Copy the block below into any conversation of that product **once** — the agent reads this repo and sets itself up:
@@ -158,7 +169,7 @@ Small mechanisms that add up:
 | **Verbatim protection** | Your latest instruction is quoted word-for-word, never paraphrased into the summarizer's interpretation |
 | **Uncommitted counts as edited** | The Files section reports working-tree changes too, not just commits |
 | **Redaction built in** | API keys, passwords, and personal information never enter the note |
-| **Self-update check** | A run may diff the installed copy against the repo; a newer version is offered to the user and takes effect on the next invocation — never mid-run, and silently skipped offline |
+| **Self-update check** | File installs may diff the installed copy against the repo at run time; a newer version is offered to the user and takes effect on the next invocation — never mid-run, silently skipped offline. Plugin installs don't need it: the plugin system updates them |
 
 ## Born from source code, cross-checked
 

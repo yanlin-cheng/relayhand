@@ -18,7 +18,9 @@ $ARGUMENTS (optional):
 
 ## Step 0: Update check (optional, non-blocking)
 
-This command evolves. If the machine is online, quickly compare your installed copy against the official source: fetch `https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md` and diff it against the file this command was installed from (typically `~/.claude/commands/relayhand.md`).
+If this command was installed as a plugin (`relayhand@yanlin-cheng`), skip this step — updates arrive through the plugin system on their own.
+
+Otherwise (installed as a raw file) and the machine is online, quickly compare your installed copy against the official source: fetch `https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md` and diff it against the file this command was installed from (typically `~/.claude/commands/relayhand.md`).
 
 - Identical → proceed silently
 - Different → the update takes effect on the **next** invocation, never mid-run: ask the user "a newer relayhand is available — update now?" If yes, overwrite the installed file with the fetched content, then continue with the current instructions

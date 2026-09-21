@@ -25,6 +25,8 @@ relayhand 换个思路：**换会话，不压会话**。
 
 ## 它是怎么工作的（30 秒看懂）
 
+## 它是怎么工作的（30 秒看懂）
+
 ```mermaid
 flowchart LR
     A["长对话<br>越聊越慢，compact 又丢细节"] --> B["跑 /relayhand"]
@@ -46,7 +48,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    Start{"你用什么 AI 产品？"} -->|"Claude Code"| A["一条命令安装<br>（见下方命令）"]
+    Start{"你用什么 AI 产品？"} -->|"Claude Code"| A["插件安装<br>两行命令（见下方）"]
     Start -->|"Codex / Cursor / Cline /<br>Qoder / WorkBuddy / …"| B["复制 Agent 安装提示词<br>粘进任意一场对话"]
     A --> E
     B --> C["你的 Agent 自己读仓库<br>自己完成安装"]
@@ -55,16 +57,25 @@ flowchart TD
     E --> F["过目接力棒 → 复制提示词 →<br>开新对话，粘贴，回车 ⚡"]
 ```
 
-**Claude Code**——一条命令装好（Windows 用 PowerShell 版）：
+**Claude Code**——以插件方式安装（在 Claude Code 会话里运行）：
+
+```
+/plugin marketplace add yanlin-cheng/relayhand
+/plugin install relayhand@yanlin-cheng
+```
+
+装完即用——命令以插件形式分发，随插件系统自动更新；任何会话里直接跑 `/relayhand`。
+
+偏好纯文件方式，或所用版本还不支持插件？一条命令照样能装（Windows 用 PowerShell 版）：
 
 ```bash
-mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -o ~/.claude/commands/relayhand.md
+mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md -o ~/.claude/commands/relayhand.md
 ```
 
 ```powershell
 # Windows PowerShell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
-irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/claude-code/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
+irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
 ```
 
 **其他 Agent 产品——Codex、Cursor、Cline、Qoder、WorkBuddy 或任何其他产品。** 别复制提示词本身，让 Agent 自己动手装。把下面的块复制进该产品的**任意一场对话**（仅此一次），Agent 会自己读仓库、自己完成安装：
@@ -157,7 +168,7 @@ flowchart LR
 | **原话逐字保护** | 你的最新指令逐字引用，绝不被"消化"成总结者的转述 |
 | **未提交也算改过** | 文件栏连工作区未 commit 的改动一并报告，不只盯提交 |
 | **脱敏内建** | API key、密码、个人信息不进接力文档 |
-| **自检更新** | 运行时可将本地已装副本与仓库比对；发现新版本先询问用户，更新在下次运行生效——绝不在运行中途换指令，离线则静默跳过 |
+| **自检更新** | 文件安装方式运行时可将本地副本与仓库比对；发现新版本先询问用户，更新在下次运行生效——绝不在运行中途换指令，离线则静默跳过。插件安装无需此步：随插件系统自动更新 |
 
 ## 源自源码，交叉验证
 
