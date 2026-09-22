@@ -63,25 +63,27 @@ flowchart TD
     E --> F["Review the baton → copy the prompt →<br>new conversation, paste, enter ⚡"]
 ```
 
-**Claude Code** — install as a plugin (in a Claude Code session, run):
+**Claude Code** — install as a plugin (in a Claude Code session, run). relayhand now ships as part of the **yanlin-skills** workflow collection:
 
 ```
-/plugin marketplace add yanlin-cheng/relayhand
-/plugin install relayhand@yanlin-cheng
+/plugin marketplace add yanlin-cheng/skills
+/plugin install yanlin-skills@yanlin-skills
 ```
 
-That's it — the command ships as a plugin, so it updates through the plugin system on its own; run `/relayhand` in any session.
+That's it — run `/relayhand` in any session; updates arrive through the plugin system on their own.
 
-Prefer a plain file, or on an older version without plugin support? One command still works (Windows users: the PowerShell version):
+**Why the move?** relayhand joined [yanlin-skills](https://github.com/yanlin-cheng/skills), a plugin collection — install once and get the whole toolkit: this command plus a Markdown project management skill, with future tools joining the same plugin and arriving automatically on update. This repo remains the cross-product home of relayhand's universal core (universal prompt + per-product adapters, below).
+
+Prefer a plain file, or on an older version without plugin support? One command still works (Windows users: the PowerShell version) — the file now lives in the collection repo:
 
 ```bash
-mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md -o ~/.claude/commands/relayhand.md
+mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/skills/main/commands/relayhand.md -o ~/.claude/commands/relayhand.md
 ```
 
 ```powershell
 # Windows PowerShell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
-irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
+irm https://raw.githubusercontent.com/yanlin-cheng/skills/main/commands/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
 ```
 
 **Any other agent product — Codex, Cursor, Cline, Qoder, WorkBuddy, or anything else.** Don't copy-paste the prompt itself; let your agent do the install. Copy the block below into any conversation of that product **once** — the agent reads this repo and sets itself up:

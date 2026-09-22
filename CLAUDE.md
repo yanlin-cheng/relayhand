@@ -15,8 +15,6 @@ relayhand/
 ├── README.md                  # 英文主门面（含 Mermaid 流程图）
 ├── README-ZH.md               # 简体中文门面（与英文版同构）
 ├── DESIGN.md                  # 设计依据与决策日志
-├── .claude-plugin/            # 插件化分发（2026-09-21）：plugin.json + marketplace.json（仓库即市场）
-├── commands/relayhand.md      # Claude Code 版命令（英文指令 + 语言跟随，$ARGUMENTS、jsonl 正本指针）
 ├── universal/relayhand.md     # 通用核心提示词（英文指令 + 语言跟随，手动粘贴）
 └── adapters/                  # 各产品适配说明（核心引用 universal/，不复制）
 ```
@@ -26,7 +24,7 @@ relayhand/
 - 通用核心只改 `universal/relayhand.md`；`adapters/` 只写挂载方式，引用不复制，避免多份漂移
 - 模板是单一版（指令英文 + 语言自动跟随），不为语言拆文件；README.md 与 README-ZH.md 同构同步
 - `commands/relayhand.md` 允许用 Claude Code 专属机制，但不得含任何个人路径、个人知识库配置
-- 发版必 bump `.claude-plugin/plugin.json` 与 `marketplace.json` 里的 version 字段（声明了 version 不 bump，插件用户会一直用缓存旧版）
+- 发版必 bump version 字段——此纪律已随插件身份移交合辑仓库 yanlin-cheng/skills（2026-09-22 起本仓库无 version 字段）
 - 模板或纪律的任何改动：先在 DESIGN.md 决策日志记一笔（为什么改），再改文件（DESIGN.md 为本地决策日志，2026-09-21 起不随仓库分发，仓库内引用仅指本机文件）
 - 本机实战副本在 `~/.claude/commands/relayhand.md`（含知识库增强层），仓库改动后手动同步过去
 - 模板改动必须实测验证：找一场真实长对话跑 /relayhand，检查产出质量再定稿
@@ -34,4 +32,4 @@ relayhand/
 
 ## 当前阶段
 
-初版建成（2026-09-19），2026-09-20 由 relay 改名 relayhand（原因见 DESIGN.md 决策日志）。2026-09-21 插件化：仓库即市场 + 插件（yanlin-cheng 市场名 / relayhand 插件名 / /relayhand 命令名），阶段二规划见 DESIGN.md 决策日志；同日补齐 handoff 对比暴露的两块长板（模板 Suggested skills 栏、README"何时不用"边界节，见 DESIGN.md 当日条目）。待实战验证：模板总结质量、任务过滤效果、插件安装流程。
+初版建成（2026-09-19），2026-09-20 由 relay 改名 relayhand（原因见 DESIGN.md 决策日志）。2026-09-21 插件化：仓库即市场 + 插件。2026-09-22 插件身份移交合辑仓库 yanlin-cheng/skills（市场/插件同名 yanlin-skills，与 md-project-manager 技能合辑；迁移理由见 DESIGN.md 决策日志）：本仓库删除 .claude-plugin/ 与 commands/，转为跨产品分发站（universal/ + adapters/ 留守），README 安装节指向合辑。待实战验证：模板总结质量、任务过滤效果。

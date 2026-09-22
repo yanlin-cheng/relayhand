@@ -87,3 +87,7 @@
 ### 2026-09-21 review 修复 + DESIGN.md 私有化
 - review 窗口三项结论当日修复提交（README 重复标题、.gitignore 补本地日志/、DESIGN 序号笔误）
 - 用户拍板 DESIGN.md 私有化：退出跟踪 + 历史抹除 + force push，决策依据记 DESIGN.md 当日条目；门面（README 双语、模板、CLAUDE.md）引用全部改为自足表述；version bump 1.1.0 → 1.1.1（模板 Personal extensions 节去 DESIGN.md 引用）
+
+### 2026-09-22 插件身份移交合辑仓库
+- relayhand 插件身份（.claude-plugin/ + commands/relayhand.md）迁入合辑仓库 yanlin-cheng/skills（市场/插件同名 yanlin-skills，v1.0.0）；本仓库降级为跨产品分发站（universal/ + adapters/），双语 README 安装节指路合辑并补"为什么迁移"
+- 发版纪律 version bump 随插件身份移交合辑仓库；迁移决策与本地实测发现（同名技能遮蔽等）记 DESIGN.md 当日条目

@@ -63,25 +63,27 @@ flowchart TD
     E --> F["过目接力棒 → 复制提示词 →<br>开新对话，粘贴，回车 ⚡"]
 ```
 
-**Claude Code**——以插件方式安装（在 Claude Code 会话里运行）：
+**Claude Code**——以插件方式安装（在 Claude Code 会话里运行）。relayhand 现已随工作流合辑 **yanlin-skills** 分发：
 
 ```
-/plugin marketplace add yanlin-cheng/relayhand
-/plugin install relayhand@yanlin-cheng
+/plugin marketplace add yanlin-cheng/skills
+/plugin install yanlin-skills@yanlin-skills
 ```
 
-装完即用——命令以插件形式分发，随插件系统自动更新；任何会话里直接跑 `/relayhand`。
+装完即用——`/relayhand` 在任何会话直接跑，随插件系统自动更新。
 
-偏好纯文件方式，或所用版本还不支持插件？一条命令照样能装（Windows 用 PowerShell 版）：
+**为什么迁移**：relayhand 加入了插件合辑 [yanlin-skills](https://github.com/yanlin-cheng/skills)——一次安装，工具全家桶：同一条命令之外还带 Markdown 项目管理技能，以后新工具也进同一个插件、随更新自动到手。本仓库继续作为 relayhand 跨产品通用的家（universal 核心提示词与各产品适配，见下）。
+
+偏好纯文件方式，或所用版本还不支持插件？一条命令照样能装（Windows 用 PowerShell 版）——文件现居合辑仓库：
 
 ```bash
-mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md -o ~/.claude/commands/relayhand.md
+mkdir -p ~/.claude/commands && curl -fsSL https://raw.githubusercontent.com/yanlin-cheng/skills/main/commands/relayhand.md -o ~/.claude/commands/relayhand.md
 ```
 
 ```powershell
 # Windows PowerShell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands" | Out-Null
-irm https://raw.githubusercontent.com/yanlin-cheng/relayhand/main/commands/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
+irm https://raw.githubusercontent.com/yanlin-cheng/skills/main/commands/relayhand.md -OutFile "$env:USERPROFILE\.claude\commands\relayhand.md"
 ```
 
 **其他 Agent 产品——Codex、Cursor、Cline、Qoder、WorkBuddy 或任何其他产品。** 别复制提示词本身，让 Agent 自己动手装。把下面的块复制进该产品的**任意一场对话**（仅此一次），Agent 会自己读仓库、自己完成安装：
