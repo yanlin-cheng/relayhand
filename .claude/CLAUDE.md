@@ -30,7 +30,7 @@
 - [ ] 实战验证模板效果（跑真实长对话；个人副本已于 2026-09-20 同步到内核优化 1-5 新版，2026-09-21 同步加 Suggested skills 栏）
 - [ ] 核实 Cline / Cursor 适配说明与最新官方文档是否一致
 - [ ] 阶段二（暂缓）：第二个可发布工具成型时建 yanlin-cheng 独立市场仓库收编各插件
-- [ ] 推送后实测插件安装流程（/plugin marketplace add yanlin-cheng/relayhand）
+- [x] 新会话实测 /relayhand:relayhand 真实调用（2026-09-21 装插件 v1.1.2，2026-09-22 真实调用通过，待办销）
 - [ ] 用户说推才推 GitHub
 
 ## 更新日志
